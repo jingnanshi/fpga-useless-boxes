@@ -1,6 +1,13 @@
-// Jingnan Shi
 // useless_boxes.sv
-// Nov. 17, 2018
+//   Jingnan Shi | Nov. 17, 2018
+
+/////////////////////////////////////////////  
+// useless_boxes
+//  Top-level module for the USELESS boxes control. Controls a servo to
+//  rotate a flipper when then switch to pulled high and flip the switch
+//  back low. Pseudo-randomly chooses between three different motion
+//  sequences. Applies the controller to all ten USELESS boxes  
+///////////////////////////////////////////// 
 module useless_boxes(input logic clk,
 						   input logic reset,
 						   input logic [9:0] switch, 
@@ -14,10 +21,11 @@ module useless_boxes(input logic clk,
 
 endmodule
 
-
-// Module for 1 useless box
-// When switch is high, the box needs to push it 
-// back to low
+/////////////////////////////////////////////  
+// useless_box
+//   Controller for one useless box. When switch is high, the box needs to
+//   push it back to low
+///////////////////////////////////////////// 
 module useless_box(input logic clk,
 						 input logic reset,
                    input logic switch,
@@ -70,7 +78,11 @@ module useless_box(input logic clk,
 			 
 endmodule 
 
-// Quick push
+
+/////////////////////////////////////////////  
+// quickpush
+//   Generates the quick push control sequence  
+///////////////////////////////////////////// 
 module quickpush(input logic clk,
 					 input logic reset,
 					 output logic [19:0] duty_cycle);
@@ -97,7 +109,10 @@ module quickpush(input logic clk,
 endmodule
 
 
-// Slowly push the switch
+/////////////////////////////////////////////  
+// slowpush
+//   Generates the slow push control sequence  
+///////////////////////////////////////////// 
 module slowpush(input logic clk,
 					 input logic reset,
 					 output logic [19:0] duty_cycle);
@@ -124,7 +139,11 @@ module slowpush(input logic clk,
 	
 endmodule
 
-// Slowly push the switch
+
+/////////////////////////////////////////////  
+// slow_then_fast_push
+//   Generates the slow to fast push control sequence  
+///////////////////////////////////////////// 
 module slow_then_fast_push(input logic clk,
 					            input logic reset,
 					            output logic [19:0] duty_cycle);
@@ -151,8 +170,11 @@ module slow_then_fast_push(input logic clk,
 	
 endmodule
 
-// A 3-bit LFSR pesdo-number generator
-// it will hold the number if not enabled
+
+/////////////////////////////////////////////  
+// lfsr_rng
+//   A 3-bit LFSR pesdo-number generator. Holds the number if not enabled
+///////////////////////////////////////////// 
 module lfsr_rng(input logic clk, 
 				    input logic reset,
 				    input logic en,
@@ -167,7 +189,10 @@ module lfsr_rng(input logic clk,
 	end
 endmodule
 
-// Generate a pulse when level changes from low to high
+/////////////////////////////////////////////  
+// level2pulse
+//   Generate a pulse when level changes from low to high
+/////////////////////////////////////////////
 module level2pulse(input clk,
 				       input reset,
 						 input level,
